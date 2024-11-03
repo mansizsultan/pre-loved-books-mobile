@@ -1,16 +1,43 @@
-# pre_loved_books
+# Platform-Based Programming: Individual Assignment with Flutter
 
-A new Flutter project.
+| NAME               | ID         | PBP CLASS |
+| ------------------ | ---------- | --------- |
+| Sultan Ibnu Mansiz | 2306275840 | D         |
 
-## Getting Started
+Pada tugas ini, saya membuat suatu projek aplikasi mobile e-commerce sederhana bernama "Second Chapters <3" dengan ide menjual buku-buku bekas. Saya menggunakan framework Flutter untuk membangun dan mengembangkan projek ini.
 
-This project is a starting point for a Flutter application.
+# Assignment 7: Flutter Basic Elements
 
-A few resources to get you started if this is your first Flutter project:
+## _Checklist_ Tugas
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- [x] Membuat sebuah program Flutter baru dengan tema _E-Commerce_ yang sesuai dengan tugas-tugas sebelumnya.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [x] Membuat tiga tombol sederhana dengan ikon dan teks untuk:
+  - [x] Melihat daftar produk (`Lihat Daftar Produk)`
+  - [x] Menambah produk (`Tambah Produk`)
+  - [x] Logout (`Logout`)
+
+- [x] Mengimplementasikan warna-warna yang berbeda untuk setiap tombol (`Lihat Daftar Produk`, `Tambah Produk`, dan `Logout`).
+
+- [x] Memunculkan `Snackbar` dengan tulisan:
+  - [x] "Kamu telah menekan tombol Lihat Daftar Produk" ketika tombol `Lihat Daftar Produk` ditekan.
+  - [x] "Kamu telah menekan tombol Tambah Produk" ketika tombol `Tambah Produk` ditekan.
+  - [x] "Kamu telah menekan tombol Logout" ketika tombol `Logout` ditekan.
+
+
+- [x] Menjawab beberapa pertanyaan berikut pada `README.md` pada _root folder_.
+
+### Jelaskan apa yang dimaksud dengan _stateless widget_ dan _stateful widget_, dan jelaskan perbedaan dari keduanya!
+
+### Sebutkan _widget_ apa saja yang kamu gunakan pada proyek ini dan jelaskan fungsinya!
+
+### Apa fungsi dari `setState()`? Jelaskan variabel apa saja yang dapat terdampak dengan fungsi tersebut!
+
+### Jelaskan perbedaan antara `const` dengan `final`!
+
+###  Jelaskan bagaimana cara kamu mengimplementasikan _checklist-checklist_ di atas!
+
+- [x] Melakukan `add`-`commit`-`push` ke suatu repositori baru di GitHub.
+
+
+
