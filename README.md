@@ -27,10 +27,10 @@ Pada tugas ini, saya membuat suatu projek aplikasi mobile e-commerce sederhana b
 
 - [x] Menjawab beberapa pertanyaan berikut pada `README.md` pada _root folder_.
 
-### Jelaskan apa yang dimaksud dengan _stateless widget_ dan _stateful widget_, dan jelaskan perbedaan dari keduanya!
+### Jelaskan apa yang dimaksud dengan _Stateless Widget_ dan _Stateful Widget_, dan jelaskan perbedaan dari keduanya!
 - _Stateless Widget_
     
-    _Stateless Widget_ adalah jenis _widget_ yang tidak berubah dari state internal yang dapat berubah seiring waktu. Artinya, tampilan dari widget ini akan tetap sama setelah pertama kali dibangun. _Stateless Widget_ hanya memiliki properti _final_ yang akan ditampilkan di layar. Pada tugas kali ini, saya menggunakan _stateless widget_ untuk menampilkan _info card_ dan _item card_ yang mana hal tersebut merupakan hal statis dan tidak berubah 
+    _Stateless Widget_ adalah jenis _widget_ yang tidak berubah dari state internal yang dapat berubah seiring waktu. Artinya, tampilan dari _widget_ ini akan tetap sama setelah pertama kali dibangun. _Stateless Widget_ hanya memiliki properti _final_ yang akan ditampilkan di layar. Pada tugas kali ini, saya menggunakan _Stateless Widget_ untuk membuat kelas `InfoCard` dan `ItemCard` yang mana kedua kelas tersebut menampilkan _widget_ yang statis dan tidak akan berubah.
 
 - _Stateful Widget_
 
@@ -40,7 +40,7 @@ Salah satu perbedaan utama antara _Stateless Widget_ dan _Stateful Widget_ adala
 
 ### Sebutkan _widget_ apa saja yang kamu gunakan pada proyek ini dan jelaskan fungsinya!
 
-Dalam tugas kali ini, saya membuat dua buah _stateless widget_ yang saya implementasikan dalam kelas `InfoCard` dan `ItemCard`. _Widget_ pada kelas `InfoCard` berfungsi untuk menampilkan data diri saya, seperti nama, npm, dan kelas. _Widget_ pada kelas `ItemCard` berfungsi untuk menampilkan tiga buah _button card_. Untuk tugas kali ini, tiga buah _button card_ tersebut hanya berfungsi untuk menampilkan _snackbar_ ketika dipencet.
+Dalam tugas kali ini, saya membuat dua buah _stateless widget_ yang saya implementasikan dalam kelas `InfoCard` dan `ItemCard`. _Widget_ pada kelas `InfoCard` berfungsi untuk menampilkan data diri saya, seperti nama, npm, dan kelas. _Widget_ pada kelas `ItemCard` berfungsi untuk menampilkan tiga buah _button card_. Untuk tugas kali ini, tiga buah _button card_ tersebut hanya berfungsi untuk menampilkan _snackbar_ ketika diklik.
 
 ### Apa fungsi dari `setState()`? Jelaskan variabel apa saja yang dapat terdampak dengan fungsi tersebut!
 
@@ -59,9 +59,10 @@ Singkatnya, `setState()` berfungsi untuk memberi tahu _framework_ bahwa ada peru
 
 - `final`
 
-    Nilai pada variabel `final` dapat ditentukan baik saaat waktu _runtime_ maupun sebelum. Ketika nilai variabelnya ditentukan, hal tersebut hanya dapat dilakukan sekali dan tidak akan berubah.
+    Nilai pada variabel `final` dapat ditentukan baik saat waktu _runtime_ maupun sebelum. Ketika nilai variabelnya ditentukan, hal tersebut hanya dapat dilakukan sekali dan tidak akan berubah.
     ```dart
       class ItemHomepage {
+        // Kedua variabel di bawah akan diinisialisasi saat runtime
         final String name;
         final IconData icon;
 
@@ -72,12 +73,12 @@ Singkatnya, `setState()` berfungsi untuk memberi tahu _framework_ bahwa ada peru
 
 ###  Jelaskan bagaimana cara kamu mengimplementasikan _checklist-checklist_ di atas!
 
-- Saya membuat projek Flutter baru dengan menjalankan command di bawah
+- Pertama, saya membuat projek Flutter baru dengan menjalankan _command_ di bawah.
   ```dart
     flutter create pre_loved_books
   ```
 
-- Untuk membuat tiga tombol sederhana dengan ikon dan teks, saya membuat file baru bernama `menu.dart` yang saya isi dengan kelas benama `ItemCard`. Kelas `ItemCard` akan menerima 2 buah variabel, yaitu `item` sebagai digunakan sebagai nama card dan icon, dan `backgroundColor` sebagai warna untuk masing-masing card yang dibuat.
+- Untuk membuat tiga tombol sederhana dengan ikon dan teks, saya membuat file baru bernama `menu.dart` yang saya isi dengan kelas benama `ItemCard`. Kelas `ItemCard` akan menerima 2 buah variabel, yaitu `item` yang digunakan untuk menginisialisai nama card dan icon, dan `backgroundColor` sebagai warna untuk masing-masing card yang dibuat.
 
   ```dart
   class ItemCard extends StatelessWidget {
@@ -90,16 +91,19 @@ Singkatnya, `setState()` berfungsi untuk memberi tahu _framework_ bahwa ada peru
 
   ```
 
-- Untuk mengimplementasikan warna yang berbeda, saya membuat variabel baru yang berisi warna-warna yang akan digunakan, lalu, akan diinisialisasi di kelas `ItemCard`.
+- Untuk mengimplementasikan warna yang berbeda, saya membuat variabel baru yang berisi warna-warna yang akan digunakan, lalu, variabel tersebut akan menginisialisasi kelas `ItemCard`.
   ```dart
   ...
+
   // Variabel warna 
   final List<Color> itemColors = [
     Colors.blue, 
     Colors.green, 
     Colors.red, 
   ];
+
   ...
+
   // Inisialisasi warna
   children: items.asMap().entries.map((entry) {
     int index = entry.key;
@@ -107,7 +111,9 @@ Singkatnya, `setState()` berfungsi untuk memberi tahu _framework_ bahwa ada peru
 
     return ItemCard(item, backgroundColor: itemColors[index]);
   }).toList(),
+
   ...
+
   // Menggunakan warna yang telah diinisialisasi
   class ItemCard extends StatelessWidget {
     final ItemHomepage item;
@@ -119,12 +125,14 @@ Singkatnya, `setState()` berfungsi untuk memberi tahu _framework_ bahwa ada peru
       return Material(
         color: backgroundColor,
         ...
+
       )
     }
   }
+
   ```
 
-- Untuk memunculkan `snackbar` yang sesuai dengan ketentuan, saya mengimplementasi kode di bawah di dalam kelas `ItemCard`
+- Untuk memunculkan `snackbar` yang sesuai dengan ketentuan, saya mengimplementasi kode di bawah pada kelas `ItemCard`.
   ```dart
     onTap: () {
       ScaffoldMessenger.of(context)
