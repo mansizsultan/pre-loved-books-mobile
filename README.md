@@ -6,6 +6,84 @@
 
 Pada tugas ini, saya membuat suatu projek aplikasi mobile e-commerce sederhana bernama "Second Chapters <3" dengan ide menjual buku-buku bekas. Saya menggunakan framework Flutter untuk membangun dan mengembangkan projek ini.
 
+# Assignment 8: Flutter Navigation, Layouts, Forms, and Input Elements
+
+## _Checklist_ Tugas
+
+- [x] Membuat minimal satu halaman baru pada aplikasi, yaitu halaman formulir tambah item baru dengan ketentuan sebagai berikut:
+
+  - [x] Memakai minimal tiga elemen input, yaitu `name`, `amount`, `description`. Tambahkan elemen input sesuai dengan model pada aplikasi tugas Django yang telah kamu buat.
+
+  - [x] Memiliki sebuah tombol `Save`.
+
+  - [x] Setiap elemen input di formulir juga harus divalidasi dengan ketentuan sebagai berikut:
+
+    - [x] Setiap elemen input tidak boleh kosong.
+
+    - [x] Setiap elemen input harus berisi data dengan tipe data atribut modelnya.
+
+ - [x] Mengarahkan pengguna ke halaman form tambah item baru ketika menekan tombol `Tambah Item` pada halaman utama.
+
+ - [x] Memunculkan data sesuai isi dari formulir yang diisi dalam sebuah `pop-up` setelah menekan tombol `Save` pada halaman formulir tambah item baru.
+
+ - [x] Membuat sebuah drawer pada aplikasi dengan ketentuan sebagai berikut:
+
+  - [x] Drawer minimal memiliki dua buah opsi, yaitu `Halaman Utama` dan `Tambah Item`.
+
+  - [x] Ketika memiih opsi `Halaman Utama`, maka aplikasi akan mengarahkan pengguna ke halaman utama.
+
+  - [x] Ketika memiih opsi `Tambah Item`, maka aplikasi akan mengarahkan pengguna ke halaman form tambah item baru.
+
+- [x] Menjawab beberapa pertanyaan berikut pada `README.md` pada _root_ folder (silakan modifikasi `README.md` yang telah kamu buat sebelumnya; tambahkan subjudul untuk setiap tugas).
+
+### Apa kegunaan `const` di Flutter? Jelaskan apa keuntungan ketika menggunakan `const` pada kode Flutter. Kapan sebaiknya kita menggunakan `const`, dan kapan sebaiknya tidak digunakan?
+
+Kegunaan `const` di Flutter adalah untuk mendeklarasikan data yang tidak berubah-ubah. Lebih lanjut, nilai pada variabel `const` ditentukan pada saat sebelum program dijalankan dan tidak dapat menerima data saat _runtime_. Salah satu keuntungan penggunaan `const` adalah untuk pengoptimalan performa dan efisiensi memori karena program tidak perlu merender ulang widget yang ditandai sebagai `const` ketika ada perubahan di _route_ yang memengaruhi _widget_ tersebut.
+- Kapan sebaiknya menggunakan `const`?
+
+  Ketika kita tahu nilai dari suatu _widget_ tidak akan berubah saat _runtime_.
+  ```dart
+    child: const Column(
+      children: [
+        ...
+      ]
+    )
+  ```
+  Nilai `const` di atas diambil dari _widget_ `LeftDrawer` yang menampilkan sesuatu yang konstan dan tidak akan berubah.
+
+- Kapan sebaiknya tidak menggunakan `const`?
+
+  Jangan gunakan `const` pada _widget_ yang variabel datanya dapat berubah saat _runtime_, salah satu contohnya adalah variabel dari _user input_.
+  ```dart
+    ...
+    children: [
+      Text('Title: $_title'),
+      Text('Author: $_author'),
+      Text('Price: $_price'),
+      Text('Description: $_desc'),
+    ],
+    ...
+  ```
+  Variabel-variabel di atas dapat berubah seusai apa yang diinput oleh _user_.
+
+### Jelaskan dan bandingkan penggunaan _Column_ dan _Row_ pada Flutter. Berikan contoh implementasi dari masing-masing _layout widget_ ini!
+
+haha
+
+###  Sebutkan apa saja elemen _input_ yang kamu gunakan pada halaman _form_ yang kamu buat pada tugas kali ini. Apakah terdapat elemen _input_ Flutter lain yang tidak kamu gunakan pada tugas ini? Jelaskan!
+
+haha
+
+### Bagaimana cara kamu mengatur tema (_theme_) dalam aplikasi Flutter agar aplikasi yang dibuat konsisten? Apakah kamu mengimplementasikan tema pada aplikasi yang kamu buat?
+
+haha
+
+### Bagaimana cara kamu menangani navigasi dalam aplikasi dengan banyak halaman pada Flutter?
+
+haha
+
+- [x] Melakukan `add`-`commit`-`push` ke GitHub.
+
 # Assignment 7: Flutter Basic Elements
 
 ## _Checklist_ Tugas
@@ -13,17 +91,22 @@ Pada tugas ini, saya membuat suatu projek aplikasi mobile e-commerce sederhana b
 - [x] Membuat sebuah program Flutter baru dengan tema _E-Commerce_ yang sesuai dengan tugas-tugas sebelumnya.
 
 - [x] Membuat tiga tombol sederhana dengan ikon dan teks untuk:
+
   - [x] Melihat daftar produk (`Lihat Daftar Produk)`)
+
   - [x] Menambah produk (`Tambah Produk`)
+
   - [x] Logout (`Logout`)
 
 - [x] Mengimplementasikan warna-warna yang berbeda untuk setiap tombol (`Lihat Daftar Produk`, `Tambah Produk`, dan `Logout`).
 
 - [x] Memunculkan `Snackbar` dengan tulisan:
-  - [x] "Kamu telah menekan tombol Lihat Daftar Produk" ketika tombol `Lihat Daftar Produk` ditekan.
-  - [x] "Kamu telah menekan tombol Tambah Produk" ketika tombol `Tambah Produk` ditekan.
-  - [x] "Kamu telah menekan tombol Logout" ketika tombol `Logout` ditekan.
 
+  - [x] "Kamu telah menekan tombol Lihat Daftar Produk" ketika tombol `Lihat Daftar Produk` ditekan.
+
+  - [x] "Kamu telah menekan tombol Tambah Produk" ketika tombol `Tambah Produk` ditekan.
+
+  - [x] "Kamu telah menekan tombol Logout" ketika tombol `Logout` ditekan.
 
 - [x] Menjawab beberapa pertanyaan berikut pada `README.md` pada _root folder_.
 
