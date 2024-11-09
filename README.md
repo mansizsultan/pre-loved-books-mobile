@@ -38,7 +38,7 @@ Pada tugas ini, saya membuat suatu projek aplikasi mobile e-commerce sederhana b
 
 ### Apa kegunaan `const` di Flutter? Jelaskan apa keuntungan ketika menggunakan `const` pada kode Flutter. Kapan sebaiknya kita menggunakan `const`, dan kapan sebaiknya tidak digunakan?
 
-Kegunaan `const` di Flutter adalah untuk mendeklarasikan data yang tidak berubah-ubah. Lebih lanjut, nilai pada variabel `const` ditentukan pada saat sebelum program dijalankan dan tidak dapat menerima data saat _runtime_. Salah satu keuntungan penggunaan `const` adalah untuk pengoptimalan performa dan efisiensi memori karena program tidak perlu merender ulang widget yang ditandai sebagai `const` ketika ada perubahan di _route_ yang memengaruhi _widget_ tersebut.
+Kegunaan `const` di Flutter adalah untuk mendeklarasikan data yang tidak berubah-ubah. Lebih lanjut, nilai pada variabel `const` ditentukan pada saat sebelum program dijalankan dan tidak dapat menerima data saat _runtime_. Salah satu keuntungan penggunaan `const` adalah untuk mengoptimalan performa dan efisiensi memori karena program tidak perlu merender ulang _widget_ yang ditandai sebagai `const` ketika ada perubahan di _route_ yang memengaruhi _widget_ tersebut.
 - Kapan sebaiknya menggunakan `const`?
 
   Ketika kita tahu nilai dari suatu _widget_ tidak akan berubah saat _runtime_.
@@ -64,25 +64,79 @@ Kegunaan `const` di Flutter adalah untuk mendeklarasikan data yang tidak berubah
     ],
     ...
   ```
-  Variabel-variabel di atas dapat berubah seusai apa yang diinput oleh _user_.
+  Variabel-variabel di atas dapat berubah sesuai apa yang diinput oleh _user_.
 
 ### Jelaskan dan bandingkan penggunaan _Column_ dan _Row_ pada Flutter. Berikan contoh implementasi dari masing-masing _layout widget_ ini!
 
-haha
+![Row and Column](resources/rowncol.png)
+
+_Courtesy of_ [https://medium.com/@apmntechdev/flutter-column-and-row-e1f35b419690](https://medium.com/@apmntechdev/flutter-column-and-row-e1f35b419690)
+
+Pada Flutter, _Column_ dan _Row_ adalah dua _widget layout_ yang sering digunakan untuk menata elemen-elemen dalam tampilan secara vertikal dan horizontal. Di bawah ini adalah penjelasan singkat tentang keduanya serta contoh implementasinya.
+
+- _Column_
+
+Menyusun _widget child_ secara vertikal dari atas ke bawah. Biasanya digunakan saat ingin menampilkan item atau elemen dalam urutan vertikal, seperti daftar, _form input_, atau informasi yang berurutan.
+
+- _Row_
+
+Menyusun _widget child_ secara horizontal dari kiri ke kanan. Biasanya digunakan ketika Anda ingin menampilkan beberapa item dalam baris yang sama, seperti ikon-ikon, tombol-tombol, atau elemen informasi yang berdampingan.
+
+```dart
+  ...
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: [
+      // Row untuk menampilkan 3 InfoCard secara horizontal.
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          InfoCard(title: 'NPM', content: npm),
+          InfoCard(title: 'Name', content: name),
+          InfoCard(title: 'Class', content: className),
+        ],
+      ),
+    ...
+    ]
+  )
+```
+
+Kode di atas merupakan implementasi _Column_ dan _Row_ yang saya gunakan di dalam projek Flutter saya yang berada pada _widget_ `MyHomePage`.
 
 ###  Sebutkan apa saja elemen _input_ yang kamu gunakan pada halaman _form_ yang kamu buat pada tugas kali ini. Apakah terdapat elemen _input_ Flutter lain yang tidak kamu gunakan pada tugas ini? Jelaskan!
 
-haha
+Pada tugas kali ini, saya hanya mengimplementasikan satu tipe elemen _input_, yaitu `TextFormField`. Selain `TextFormField`, ada beberapa elemen _input_ lain, seperti `Checkbox` yang memungkinkan pengguna untuk memilih satu opsi dari beberapa pilihan, `Slider` yang memungkinkan pengguna memilih nilai dari rentang tertentu, dsb.
 
 ### Bagaimana cara kamu mengatur tema (_theme_) dalam aplikasi Flutter agar aplikasi yang dibuat konsisten? Apakah kamu mengimplementasikan tema pada aplikasi yang kamu buat?
 
-haha
+Cara saya mengatur tema dalam mengembangkan aplikasi Flutter saya adalah dengan menyesuaikan apa yang telah saya buat sebelumnya pada projek Django. Untuk membuat aplikasi Flutter yang konsisten, kita perlu menyesuaikan komponen-komponen tampilan, seperti teks, warna, icon, dan tombol agar sesuai dengan tema yang kita bawa.
 
 ### Bagaimana cara kamu menangani navigasi dalam aplikasi dengan banyak halaman pada Flutter?
 
-haha
+Pertama, saya membuat sebuah direktori baru bernama `screens` khusus untuk menyimpan file-file yang sekiranya akan ditampilkan pada aplikasi. Untuk melakukan navigasi perpindahan dari satu halaman ke halaman yang lain, saya menggunakan fungsi `push()`, `pop()`, dan `pushReplacement()` yang diimplementasikan pada sebuah ikon ataupun tombol sebagai _event handler_.
+
+Contoh, saya mempunyai sebuah _widget_ bernama `MyHomePage` pada file `menu.dart` yang dapat diakses ketika _user_ memencet ikon yang ada pada _drawer_.
+
+```dart
+
+  ListTile(
+    leading: const Icon(Icons.home_outlined),
+    title: const Text('Halaman Utama'),
+    // Bagian redirection ke MyHomePage
+    onTap: () {
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MyHomePage(),
+          ));
+    },
+  ),
+
+```
+Ketika ikon ataupun teks di atas dipencet, tampilan akan berubah menjadi halaman _widget_ `MyHomePage()` dengan menggunakan fungsi `pushReplacement()`sebagai navigasi ke halaman baru.
 
 - [x] Melakukan `add`-`commit`-`push` ke GitHub.
+
 
 # Assignment 7: Flutter Basic Elements
 
