@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pre_loved_books/screens/menu.dart';
 import 'package:pre_loved_books/screens/product_form.dart';
+import 'package:pre_loved_books/screens/list_product.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
@@ -10,12 +11,12 @@ class LeftDrawer extends StatelessWidget {
     return Drawer(
       child: ListView(
         children: [
-          DrawerHeader(
+          const DrawerHeader(
             decoration: BoxDecoration(
               // color: Theme.of(context).colorScheme.primary,
               color: Colors.yellow,
             ),
-            child: const Column(
+            child: Column(
               children: [
                 Text(
                   'Second Chapters <3',
@@ -54,7 +55,7 @@ class LeftDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.book),
             title: const Text('Tambah Buku'),
-            // Bagian redirection ke MoodEntryFormPage
+            // Bagian redirection ke ProductFormPage
             onTap: () {
               Navigator.pushReplacement(
                 context,
@@ -62,6 +63,17 @@ class LeftDrawer extends StatelessWidget {
                   builder: (context) =>const ProductFormPage(),
                 )
               );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.add_reaction_rounded),
+            title: const Text('Daftar Buku'),
+            onTap: () {
+                // Route menu ke halaman product
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ProductEntryPage()),
+                );
             },
           ),
         ],

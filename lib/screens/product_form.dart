@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pre_loved_books/widgets/left_drawer.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
+import 'package:pre_loved_books/screens/menu.dart';
+import 'dart:convert';
+
 
 class ProductFormPage extends StatefulWidget {
   const ProductFormPage({super.key});
@@ -10,12 +15,14 @@ class ProductFormPage extends StatefulWidget {
 
 class _ProductFormPageState extends State<ProductFormPage> {
   final _formKey = GlobalKey<FormState>();
-  String _title = "";
+  String _name = "";
   String _author = "";
   int _price = 0;
-  String _desc = "";
+  String _description = "";
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Center(
@@ -39,15 +46,15 @@ class _ProductFormPageState extends State<ProductFormPage> {
               child: TextFormField(
                 maxLength: 255,
                 decoration: InputDecoration(
-                  hintText: "Title",
-                  labelText: "Title",
+                  hintText: "Name",
+                  labelText: "Name",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5.0),
                   ),
                 ),
                 onChanged: (String? value) {
                   setState(() {
-                    _title = value!;
+                    _name = value!;
                   });
                 },
                 validator: (String? value) {
@@ -122,7 +129,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
                 ),
                 onChanged: (String? value) {
                   setState(() {
-                    _desc = value!;
+                    _description = value!;
                   });
                 },
                 validator: (String? value) {
@@ -139,39 +146,41 @@ class _ProductFormPageState extends State<ProductFormPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(
+                    backgroundColor: WidgetStateProperty.all(
                         Theme.of(context).colorScheme.primary),
                   ),
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: const Text('Buku berhasil tersimpan!'),
-                            content: SingleChildScrollView(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('Title: $_title'),
-                                  Text('Author: $_author'),
-                                  Text('Price: $_price'),
-                                  Text('Description: $_desc'),
-                                ],
-                              ),
-                            ),
-                            actions: [
-                              TextButton(
-                                child: const Text('OK'),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                  _formKey.currentState!.reset();
-                                },
-                              ),
-                            ],
-                          );
-                        },
+                      final response = await request.postJson(
+                        "http://127.0.0.1:8000/create-flutter/",
+                        jsonEncode(<String, dynamic>{
+                          'name': _name,
+                          'author': _author,
+                          'price': _price,
+                          'description': _description,
+                        }),
                       );
+                      if (context.mounted) {
+                        if (response['status'] == 'success') {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text("Produk baru berhasil disimpan!"),
+                            ),
+                          );
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MyHomePage()),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                  "Terdapat kesalahan, silakan coba lagi."),
+                            ),
+                          );
+                        }
+                      }
                     }
                   },
                   child: const Text(
