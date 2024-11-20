@@ -6,6 +6,81 @@
 
 Pada tugas ini, saya membuat suatu projek aplikasi mobile e-commerce sederhana bernama "Second Chapters <3" dengan ide menjual buku-buku bekas. Saya menggunakan framework Flutter untuk membangun dan mengembangkan projek ini.
 
+# Assignment 9: Django Web Service Integration with Flutter App
+
+## _Checklist_ Tugas
+
+- [x] Memastikan _deployment_ proyek tugas Django kamu telah berjalan dengan baik.
+
+- [x] Mengimplementasikan fitur registrasi akun pada proyek tugas Flutter.
+
+- [x] Membuat halaman login pada proyek tugas Flutter.
+
+- [x] Mengintegrasikan sistem autentikasi Django dengan proyek tugas Flutter.
+
+- [x] Membuat model kustom sesuai dengan proyek aplikasi Django.
+
+- [x] Membuat halaman yang berisi daftar semua item yang terdapat pada _endpoint_ `JSON` di Django yang telah kamu _deploy_.
+
+  - [x] Tampilkan _name_, _price_, dan _description_ dari masing-masing item pada halaman ini.
+
+- [x] Membuat halaman detail untuk setiap item yang terdapat pada halaman daftar Item.
+
+  - [x] Halaman ini dapat diakses dengan menekan salah satu item pada halaman daftar Item.
+
+  - [x] Tampilkan seluruh atribut pada model item kamu pada halaman ini.
+
+  - [x] Tambahkan tombol untuk kembali ke halaman daftar item.
+
+- [x] Melakukan filter pada halaman daftar item dengan hanya menampilkan item yang terasosiasi dengan pengguna yang login.
+
+- [x] Menjawab beberapa pertanyaan berikut pada `README.md` pada _root_ folder (silakan modifikasi `README.md` yang telah kamu buat sebelumnya; tambahkan subjudul untuk setiap tugas).
+
+### Jelaskan mengapa kita perlu membuat model untuk melakukan pengambilan ataupun pengiriman data `JSON`? Apakah akan terjadi _error_ jika kita tidak membuat model terlebih dahulu?
+
+Model itu penting buat menjaga data tetap rapi dan konsisten. Selain itu, model juga otomatis ngecek validasi data, jadi lebih gampang buat dirawat. Dengan model, kita bisa menghindari _error_, seperti parsing yang salah atau _field_ yang kelupaan.
+
+### Jelaskan fungsi dari library `http` yang sudah kamu implementasikan pada tugas ini
+
+Library `http` dipakai untuk melakukan permintaan `HTTP` seperti `GET` atau `POST`, mengelola pengiriman dan penerimaan data dalam format `JSON`, serta menangani autentikasi lewat _header_.
+
+### Jelaskan fungsi dari `CookieRequest` dan jelaskan mengapa _instance_ `CookieRequest` perlu untuk dibagikan ke semua komponen di aplikasi Flutter.
+
+`CookieRequest` digunakan untuk mengelola cookies secara otomatis dalam autentikasi berbasis sesi. Ini memastikan sesi tetap konsisten di setiap permintaan, mempermudah pengelolaan autentikasi, dan membuat aplikasi lebih efisien. Dengan membagikan `CookieRequest`, kita bisa menjaga autentikasi tetap stabil tanpa perlu membuat instance baru, sehingga pengelolaannya jadi lebih simpel di seluruh aplikasi.
+
+### Jelaskan mekanisme pengiriman data mulai dari input hingga dapat ditampilkan pada Flutter.
+
+Prosesnya dimulai saat pengguna memasukkan data lewat aplikasi Flutter. Data ini lalu diubah jadi format `JSON` biar gampang dikirim ke _backend_. Flutter pakai `HTTP` buat ngirim data itu ke _server_, di mana _backend_ mengolah untuk simpan ke database atau menjalankan logika tertentu. Setelah selesai, _server_ akan ngirim respons balik, biasanya dalam format `JSON`. Flutter nerima respons ini, ngolah datanya, dan memperbarui tampilan di aplikasi biar pengguna bisa lihat hasil input mereka atau info lain yang dibutuhkan.
+
+### Jelaskan mekanisme autentikasi dari _login_, _register_, hingga _logout_. Mulai dari input data akun pada Flutter ke Django hingga selesainya proses autentikasi oleh Django dan tampilnya menu pada Flutter.
+
+Proses autentikasi dimulai ketika data akun dari Flutter dikirim ke _backend_ Django. Django memvalidasi data tersebut, baik untuk _login_ (dengan membuat _session_) atau _register_ (dengan menyimpan data pengguna baru). Setelah validasi selesai, Django mengirimkan respons kembali ke Flutter, seperti status autentikasi atau pesan tertentu. Flutter kemudian memproses respons ini dan memperbarui UI sesuai dengan status autentikasi, misalnya menampilkan menu utama jika login berhasil atau pesan error jika ada kesalahan.
+
+### Jelaskan bagaimana cara kamu mengimplementasikan _checklist_ di atas secara _step-by-step!_ (bukan hanya sekadar mengikuti tutorial).
+
+- Implementasi fitur registrasi, login, dan integrasi autentikasi pada projek Django untuk Flutter
+
+  Saya melakukan setup autentikasi pada projek Django yang sebelumnya saya buat denga membuat aplikasi baru beranama `authentication`. lalu pada `views.py` di aplikasi `authentication`, saya menambahkan metode _view_ untuk mengakses tampilan _register_ dan _login_. Setelah saya membuat metode _view_, saya melakukan routing di `urls.py` terhadap kedua metode yang saya buat. Lalu, pada direkotori `screens`yang berada di projek Flutter saya, saya membuat dua buah file baru, yaitu `login.dart` dan `register.dart`.
+
+- Membuat model kustom yang sesuai dengan projek Django
+
+  Untuk membuat model kustom yang sesuai dengan proyek Django, ambil data `JSON` dari proyek tersebut dan buka website `QuickType`. Pilih bahasa Dart dan beri nama Model yang sesuai dengan kebutuhan. Setelah itu, salin hasil konversi dari QuickType dan tempelkan ke dalam file di folder models di projek Flutter.
+
+- Membuat halaman yang berisi daftar semua item yang terdapat pada _endpoint_ `JSON` di Django yang telah kamu _deploy_.
+
+  Ambil semua data `JSON` yang dimiliki oleh pengguna (yang sudah diimplementasikan di Django), kemudian simpan data tersebut ke dalam sebuah list untuk memudahkan pengolahan atau penampilannya. Setelah dikumpulkan ke dalam list, tampilkan data-data tersebut dengan ListView.
+
+- Membuat halaman detail untuk setiap item yang terdapat pada halaman daftar Item.
+
+  Saya tiap item pada halaman yang menampilkan seluruh data dapat dipencet dan akan mengarahkan ke halaman baru yang akan menampilkan informasi mengenai item yang dipencet tersebut. Halaman yang saya buat saya berikan nama `product_info.dart` dan saya letakkan di dalam direkotori `screens`.
+
+- Melakukan filter pada halaman daftar item dengan hanya menampilkan item yang terasosiasi dengan pengguna yang _login_.
+
+  Sudah dilakukan pada implementasi django.
+
+- [x] Melakukan `add`-`commit`-`push` ke GitHub.
+
+
 # Assignment 8: Flutter Navigation, Layouts, Forms, and Input Elements
 
 ## _Checklist_ Tugas
